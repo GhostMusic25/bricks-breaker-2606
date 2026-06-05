@@ -34,6 +34,7 @@ void Game::Reset()
 	}
 
 	victory = false; 
+	defeat = false; 
 }
 
 void Game::ResetBall()
@@ -86,6 +87,10 @@ void Game::Render() const
 	if (victory == true) {
 		Console::WordWrap(23, 20, 34, "You win! Press 'R' to play again.");
 	}
+
+	if (defeat == true) {
+		Console::WordWrap(23, 20, 35, "You Lose. Press 'R' to Play Again"); 
+	}
 }
 
 void Game::CheckCollision()
@@ -118,4 +123,8 @@ void Game::CheckCollision()
 	}
 
 	// TODO #7 - If ball touches bottom of window, pause ball and display (render) defeat text with R to reset
+	if (ball.y_position >= WINDOW_HEIGHT) {
+		ball.moving = false; 
+		defeat = true;
+	}
 }
